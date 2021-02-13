@@ -22,7 +22,8 @@ createElementClass <- function(element, golden) {
 #' @export
 #' @importFrom shiny tagList
 rpgSlider <- function(inputId, label, min, max, value, golden = FALSE) {
-  tagList(
+  div(
+    style = "margin: 5px",
     tags$label(label),
     tags$input(
       class = createElementClass("slider", golden),

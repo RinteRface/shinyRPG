@@ -48,3 +48,24 @@ updateRpgProgress <- function(id, value = NULL, color = NULL, session = shiny::g
   options <- dropNulls(list(id = id, value = value, color = color))
   session$sendCustomMessage("update-progress", options)
 }
+
+
+
+
+#' Beautiful container
+#'
+#' Container to include RPG elements inside.
+#'
+#' @param ... Ui elements.
+#' @param style Style. NULL by default. Valid choices are framed, framed-golden,
+#' framed-golden-2 and framed-grey.
+#'
+#' @export
+rpgContainer <- function(..., style = NULL) {
+  if (!is.null(style)) validateRpgStyle(style)
+
+  tags$div(
+    class = paste("rpgui-container", if (!is.null(style)) style),
+    ...
+  )
+}

@@ -254,3 +254,13 @@ validateRpgColor <- function(color) {
     stop(sprintf("%s not in valid colors: %s", color, validRpgColors))
   }
 }
+
+
+validRpgStyles <- c("framed", "framed-golden", "framed-golden-2", "framed-grey")
+
+#' @keywords  internal
+validateRpgStyle <- function(style) {
+  if (!(style %in% validRpgStyles)) {
+    stop(sprintf("%s not in valid styles: %s", style, validRpgStyles))
+  }
+}

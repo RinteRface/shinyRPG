@@ -18,11 +18,41 @@ remotes::install_github("RinteRface/shinyRPG")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows the template:
 
 ``` r
+library(shiny)
 library(shinyRPG)
-## basic example code
+
+ui <- rpgPage(
+  rpgProgress("progress", 10),
+  rpgButton("update", "Update slider"),
+  rpgSlider("slider", "Slider", 0, 100, 5, golden = TRUE)
+)
+
+server <- function(input, output, session) {
+  observe({
+    print(
+      list(
+        button = input$update,
+        slider = input$slider
+      )
+    )
+  })
+  
+  observeEvent({
+    req(input$update > 0)
+    input$update
+  }, {
+    updateRpgSlider("slider", 8)
+  })
+  
+  observeEvent(input$slider, {
+    updateRpgProgress("progress", value = input$slider / 100)
+  })
+}
+
+shinyApp(ui, server)
 ```
 
 __Note__: valid JS instances are checkbox, draggable, progress, radio, dropdown, list and slider.

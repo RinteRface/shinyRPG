@@ -12,7 +12,7 @@ add_shinyRPG_deps <- function(tag) {
   name = "shinyRPG",
   version = packageVersion("shinyRPG"),
   src = c(file = "shinyRPG-0.0.0.9000"),
-  script = "js/shinyRPG.min.js",
+  script = "js/shinyRPG.js",
   package = "shinyRPG",
  )
  tagList(tag, shinyRPG_deps)

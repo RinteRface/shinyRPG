@@ -244,3 +244,13 @@ findAttribute <- function(x, attr, val) {
 
   return(FALSE) # found no attribute called `attr`
 }
+
+
+validRpgColors <- c("red", "blue", "green", "purple")
+
+#' @keywords internal
+validateRpgColor <- function(color) {
+  if (!(color %in% validRpgColors)) {
+    stop(sprintf("%s not in valid colors: %s", color, validRpgColors))
+  }
+}

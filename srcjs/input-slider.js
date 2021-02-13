@@ -1,10 +1,10 @@
 var slider = new Shiny.InputBinding();
 $.extend(slider, {
-  initialize: function(el) {
-    RPGUI.create(el, "slider");
-  },
   find: function(scope) {
     return $(scope).find('.rpgui-slider');
+  },
+  initialize: function(el) {
+    RPGUI.create(el, "slider");
   },
   getValue: function(el) {
     return parseInt(RPGUI.get_value(el));
@@ -26,4 +26,4 @@ $.extend(slider, {
     $(el).off('.slider');
   }
 });
-Shiny.inputBindings.register(slider, 'shinyRPG.whatever');
+Shiny.inputBindings.register(slider, 'shinyRPG.slider');

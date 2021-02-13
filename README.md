@@ -10,10 +10,10 @@ The goal of shinyRPG is to ...
 
 ## Installation
 
-You can install the released version of shinyRPG from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of shinyRPG from Github with:
 
 ``` r
-install.packages("shinyRPG")
+remotes::install_github("RinteRface/shinyRPG")
 ```
 
 ## Example
@@ -25,3 +25,4 @@ library(shinyRPG)
 ## basic example code
 ```
 
+__Note__: valid JS instances are checkbox, draggable, progress, radio, dropdown, list and slider.

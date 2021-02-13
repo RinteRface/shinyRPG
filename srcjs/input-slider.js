@@ -4,13 +4,13 @@ $.extend(slider, {
     RPGUI.create(el, "slider");
   },
   find: function(scope) {
-    return $(scope).find('.rpgui-slider')
+    return $(scope).find('.rpgui-slider');
   },
   getValue: function(el) {
-    return RPGUI.get_value(el)
+    return parseInt(RPGUI.get_value(el));
   },
   setValue: function(el, value) {
-    RPGUI.set_value(el, value)
+    RPGUI.set_value(el, value);
   },
   receiveMessage: function(el, data) {
     this.setValue(el, data);

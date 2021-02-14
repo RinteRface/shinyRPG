@@ -49,7 +49,7 @@ rpgSlider <- function(inputId, label, min, max, value, golden = FALSE) {
 #' @rdname rpg-slider
 #'
 #' @export
-updateRpgSlider <- function(inputId, value, session = shiny::getDefaultReactiveDomain()) {
+updateRpgSlider <- function(session = shiny::getDefaultReactiveDomain(), inputId, value) {
   session$sendInputMessage(inputId, value)
 }
 
@@ -79,3 +79,76 @@ rpgButton <- function(inputId, label, golden = FALSE) {
     tags$p(label)
   )
 }
+
+
+
+#rpgCheckbox <- function(inputId, label, value = FALSE, golden = FALSE) {
+#  value <- restoreInput(id = inputId, default = value)
+#  #tagList(
+#  #  tags$input(
+#  #    id = inputId,
+#  #    class = createElementClass("checkbox", golden),
+#  #    #checked = value,
+#  #    type = "checkbox"
+#  #  ),
+#  #  tags$label(label)
+#  #)
+#  HTML('<input id="checkbox" class="rpgui-checkbox" type="checkbox"><label>This is checkbox.</label>')
+#}
+
+
+
+
+
+#' Create a select input
+#'
+#' \link{rpgSelect} creates a dropdown select input. Whenever size is not NULL,
+#' it is displayed as a box.
+#'
+#' @inheritParams shiny::selectInput
+#'
+#' @rdname rpg-select
+#' @export
+rpgSelect <- function(inputId, label, choices, selected = NULL,
+                      multiple = FALSE, size = NULL) {
+  selectTag <- shiny::selectInput(
+    inputId,
+    label,
+    choices,
+    selected,
+    multiple,
+    selectize = FALSE,
+    width = NULL,
+    size
+  )
+
+  # Modify tag
+  selectTag$attribs$class <- NULL
+  # Clean extra label class
+  selectTag$children[[1]]$attribs$class <- NULL
+  # Remove extra outer div
+  selectTag$children[[2]] <- selectTag$children[[2]]$children[[1]]
+
+  # Add good class for rppgui binding
+  selectTag$children[[2]]$attribs$class <- if (is.null(size)) {
+    "rpgui-dropdown"
+  } else {
+    "rpgui-list"
+  }
+
+  selectTag
+}
+
+
+
+#' Update a select input
+#'
+#' \link{updateRpgSelect} allows to update a \link{rpgSelect} on the server.
+#'
+#' @inheritParams shiny::updateSelectInput
+#'
+#' @note For now, only the selected value may be updated.
+#'
+#' @rdname rpg-select
+#' @export
+updateRpgSelect <- updateSelectInput

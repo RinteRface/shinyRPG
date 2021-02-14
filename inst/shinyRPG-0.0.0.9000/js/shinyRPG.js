@@ -22,6 +22,65 @@ $.extend(button, {
 
 Shiny.inputBindings.register(button, "shinyRPG.button");
 
+var checkbox = new Shiny.InputBinding;
+
+$.extend(checkbox, {
+    find: function(scope) {
+        return $(scope).find(".rpgui-checkbox");
+    },
+    initialize: function(el) {
+        RPGUI.create(el, "checkbox");
+    },
+    getValue: function(el) {
+        return RPGUI.get_value(el);
+    },
+    setValue: function(el, value) {
+        RPGUI.set_value(el, value);
+    },
+    receiveMessage: function(el, data) {
+        this.setValue(el, data);
+        $(el).trigger("change");
+    },
+    subscribe: function(el, callback) {
+        $(el).on("change.checkbox", (function(e) {
+            callback(true);
+        }));
+    },
+    unsubscribe: function(el) {
+        $(el).off(".checkbox");
+    }
+});
+
+Shiny.inputBindings.register(checkbox, "shinyRPG.checkbox");
+
+var select = new Shiny.InputBinding;
+
+$.extend(select, {
+    find: function(scope) {
+        return $(scope).find(".rpgui-dropdown") && $(scope).find(".rpgui-list");
+    },
+    getValue: function(el) {
+        return RPGUI.get_value(el);
+    },
+    setValue: function(el, value) {
+        RPGUI.set_value(el, value);
+    },
+    receiveMessage: function(el, data) {
+        this.setValue(el, data.value);
+        $(el).trigger("change");
+    },
+    subscribe: function(el, callback) {
+        $(el).on("change.select", (function(e) {
+            callback();
+        }));
+    },
+    unsubscribe: function(el) {
+        $(el).off(".select");
+    }
+});
+
+Shiny.inputBindings.register(select, "shinyRPG.select");
+
 var slider = new Shiny.InputBinding;
 
 $.extend(slider, {

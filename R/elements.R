@@ -5,7 +5,7 @@
 #' @param id Progress unique id. Necessary to use \link{updateRpgProgress}.
 #' @param value Progress value between 0 and 100.
 #' @param color Progress color. Valid colors are red, blue, green or purple. Defaults to
-#' purple.
+#' purple. See \link{validRpgColors}
 #'
 #' @rdname rpg-progress
 #' @export
@@ -53,20 +53,12 @@ updateRpgProgress <- function(id, value = NULL, color = NULL, session = shiny::g
 
 
 
-#' Beautiful container
-#'
-#' Container to include RPG elements inside.
-#'
-#' @param ... Ui elements.
-#' @param style Style. NULL by default. Valid choices are framed, framed-golden,
-#' framed-golden-2 and framed-grey.
-#'
-#' @export
-rpgContainer <- function(..., style = NULL) {
-  if (!is.null(style)) validateRpgStyle(style)
 
-  tags$div(
-    class = paste("rpgui-container", if (!is.null(style)) style),
-    ...
-  )
+#' Create a RPG icon tag
+#'
+#' @param name Icon name. See \link{validRpgIcons}.
+#' @export
+rpgIcon <- function(name) {
+  validateRpgIcon(name)
+  div(class = sprintf("rpgui-icon %s", name))
 }

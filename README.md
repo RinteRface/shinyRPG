@@ -29,6 +29,15 @@ ui <- rpgPage(
     rpgProgress("progress", 10),
     rpgButton("update", "Update slider"),
     rpgSlider("slider", "Slider", 0, 100, 50, golden = TRUE),
+    # rpgCheckbox("checkbox", "Check me!"),
+    rpgSelect("variable", "Variable:",
+              c("Cylinders" = "cyl",
+                "Transmission" = "am",
+                "Gears" = "gear")),
+    rpgSelect("variable2", "Variable 2:",
+              c("Cylinders" = "cyl",
+                "Transmission" = "am",
+                "Gears" = "gear"), size = 3),
     style = "framed-golden"
   )
 )
@@ -38,7 +47,10 @@ server <- function(input, output, session) {
     print(
       list(
         button = input$update,
-        slider = input$slider
+        slider = input$slider,
+        checkbox = input$checkbox,
+        select = input$variable,
+        list = input$variable2
       )
     )
   })
@@ -47,8 +59,9 @@ server <- function(input, output, session) {
     req(input$update > 0)
     input$update
   }, {
-    updateRpgSlider("slider", 50)
+    updateRpgSlider(session, "slider", 50)
     updateRpgProgress("progress", color = "green")
+    updateRpgSelect(session, inputId = "variable2", selected = "gear")
   })
   
   observeEvent(input$slider, {

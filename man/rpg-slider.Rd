@@ -7,7 +7,7 @@
 \usage{
 rpgSlider(inputId, label, min, max, value, golden = FALSE)
 
-updateRpgSlider(inputId, value, session = shiny::getDefaultReactiveDomain())
+updateRpgSlider(session = shiny::getDefaultReactiveDomain(), inputId, value)
 }
 \arguments{
 \item{inputId}{\link{rpgSlider} unique id.}

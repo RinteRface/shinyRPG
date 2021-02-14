@@ -245,7 +245,7 @@ findAttribute <- function(x, attr, val) {
   return(FALSE) # found no attribute called `attr`
 }
 
-
+#' @export
 validRpgColors <- c("red", "blue", "green", "purple")
 
 #' @keywords internal
@@ -256,11 +256,37 @@ validateRpgColor <- function(color) {
 }
 
 
+#' @export
 validRpgStyles <- c("framed", "framed-golden", "framed-golden-2", "framed-grey")
 
 #' @keywords  internal
 validateRpgStyle <- function(style) {
   if (!(style %in% validRpgStyles)) {
     stop(sprintf("%s not in valid styles: %s", style, validRpgStyles))
+  }
+}
+
+#' @export
+validRpgIcons <- c(
+  "sword",
+	"shield",
+	"exclamation",
+	"potion-red",
+	"potion-green",
+	"potion-blue",
+	"weapon-slot",
+	"shield-slot",
+	"armor-slot",
+	"helmet-slot",
+	"ring-slot",
+	"potion-slot",
+	"magic-slot",
+	"shoes-slot",
+	"empty-slot"
+)
+
+validateRpgIcon <- function(name) {
+  if (!(name %in% validRpgIcons)) {
+    stop(sprintf("%s not in valid icon: %s", name, validRpgIcons))
   }
 }

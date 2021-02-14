@@ -25,9 +25,12 @@ library(shiny)
 library(shinyRPG)
 
 ui <- rpgPage(
-  rpgProgress("progress", 10),
-  rpgButton("update", "Update slider"),
-  rpgSlider("slider", "Slider", 0, 100, 5, golden = TRUE)
+  rpgContainer(
+    rpgProgress("progress", 10),
+    rpgButton("update", "Update slider"),
+    rpgSlider("slider", "Slider", 0, 100, 50, golden = TRUE),
+    style = "framed-golden"
+  )
 )
 
 server <- function(input, output, session) {
@@ -44,11 +47,12 @@ server <- function(input, output, session) {
     req(input$update > 0)
     input$update
   }, {
-    updateRpgSlider("slider", 8)
+    updateRpgSlider("slider", 50)
+    updateRpgProgress("progress", color = "green")
   })
   
   observeEvent(input$slider, {
-    updateRpgProgress("progress", value = input$slider / 100)
+    updateRpgProgress("progress", value = input$slider)
   })
 }
 

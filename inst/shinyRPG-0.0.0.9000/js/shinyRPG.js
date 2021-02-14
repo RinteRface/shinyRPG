@@ -61,6 +61,15 @@ $((function() {
     }));
     Shiny.addCustomMessageHandler("update-progress", (function(message) {
         let $el = document.getElementById(message.id);
+        if (message.hasOwnProperty("color")) {
+            let val = parseInt($el.children[1].children[0].style["width"]);
+            let newElHTML = `<div\n        id="${message.id}"\n        class="rpgui-progress ${message.color}"\n        ></div>`;
+            $(newElHTML).insertAfter($($el));
+            $($el).remove();
+            $el = document.getElementById(message.id);
+            RPGUI.create($el, "progress");
+            RPGUI.set_value($el, val / 100);
+        }
         if (message.hasOwnProperty("value")) {
             RPGUI.set_value($el, message.value);
         }

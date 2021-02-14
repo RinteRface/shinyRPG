@@ -45,6 +45,7 @@ rpgProgress <- function(id, value, color = "purple") {
 #'
 #' @rdname rpg-progress
 updateRpgProgress <- function(id, value = NULL, color = NULL, session = shiny::getDefaultReactiveDomain()) {
+  if (!is.null(value)) value <- value / 100
   options <- dropNulls(list(id = id, value = value, color = color))
   session$sendCustomMessage("update-progress", options)
 }

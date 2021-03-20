@@ -53,6 +53,8 @@ $.extend(checkbox, {
 
 Shiny.inputBindings.register(checkbox, "shinyRPG.checkbox");
 
+Shiny.inputBindings.setPriority("shinyRPG.checkbox", 10);
+
 var select = new Shiny.InputBinding;
 
 $.extend(select, {

@@ -22,3 +22,27 @@ rpgContainer <- function(..., style = NULL) {
     ...
   )
 }
+
+
+
+#' Utility to center elements
+#'
+#' @param tag Tag on which to apply the class.
+#'
+#' @return The input tag with modified class.
+#' @export
+rpgCenter <- function(tag) {
+  tag$attribs$class <- paste0(tag$attribs$class, " rpgui-center")
+  tag
+}
+
+#' Utility to disable elements
+#'
+#' @param tag Tag on which to apply the attribute.
+#'
+#' @return The input tag with modified attribute.
+#' @export
+rpgDisable <- function(tag) {
+  tag$attribs$disabled <- NA
+  tag
+}

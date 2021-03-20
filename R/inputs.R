@@ -82,20 +82,40 @@ rpgButton <- function(inputId, label, golden = FALSE) {
 
 
 
-#rpgCheckbox <- function(inputId, label, value = FALSE, golden = FALSE) {
-#  value <- restoreInput(id = inputId, default = value)
-#  #tagList(
-#  #  tags$input(
-#  #    id = inputId,
-#  #    class = createElementClass("checkbox", golden),
-#  #    #checked = value,
-#  #    type = "checkbox"
-#  #  ),
-#  #  tags$label(label)
-#  #)
-#  HTML('<input id="checkbox" class="rpgui-checkbox" type="checkbox"><label>This is checkbox.</label>')
-#}
+#' Create a checkbox input
+#'
+#' \link{rpgCheckbox} is a nice checkbox input with RPG design.
+#'
+#' @inheritParams shiny::checkboxInput
+#'
+#' @rdname rpg-checkbox
+#' @export
+rpgCheckbox <- function(inputId, label, value = FALSE, golden = FALSE) {
+  value <- restoreInput(id = inputId, default = value)
+  HTML(
+    sprintf(
+    '<input id="%s" class="%s" type="checkbox" checked="%s"><label>%s</label>',
+      inputId,
+      createElementClass("checkbox", golden),
+      value,
+      label
+    )
+  )
+}
 
+
+
+#' Update a checkbox input
+#'
+#' \link{updateRpgCheckbox} allows to update a \link{rpgCheckbox} on the server.
+#'
+#' @inheritParams shiny::updateCheckboxInput
+#'
+#' @note For now, only the selected value may be updated.
+#'
+#' @rdname rpg-checkbox
+#' @export
+updateRpgCheckbox <- shiny::updateCheckboxInput
 
 
 
@@ -151,4 +171,4 @@ rpgSelect <- function(inputId, label, choices, selected = NULL,
 #'
 #' @rdname rpg-select
 #' @export
-updateRpgSelect <- updateSelectInput
+updateRpgSelect <- shiny::updateSelectInput

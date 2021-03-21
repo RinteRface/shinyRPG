@@ -24,10 +24,10 @@ are not fulfilled. This function is borrowed from shinydashboard.
 }
 \examples{
 \dontrun{
- library(shiny)
- myTag <- div(class = "bg-blue")
- tagAssert(myTag, type = "div")
- tagAssert(myTag, type = "li") # will fail
- tagAssert(myTag, class = "bg-blue")
+library(shiny)
+myTag <- div(class = "bg-blue")
+tagAssert(myTag, type = "div")
+tagAssert(myTag, type = "li") # will fail
+tagAssert(myTag, class = "bg-blue")
 }
 }

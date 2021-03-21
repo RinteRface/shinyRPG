@@ -21,6 +21,9 @@ updateRpgCheckbox(
 
 \item{value}{Initial value (\code{TRUE} or \code{FALSE}).}
 
+\item{golden}{Style parameter. If TRUE, the slider is bordered by fancy elements.
+FALSE by default.}
+
 \item{session}{The \code{session} object passed to function given to
 \code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
 }

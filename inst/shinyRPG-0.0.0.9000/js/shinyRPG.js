@@ -32,6 +32,7 @@ $.extend(checkbox, {
         RPGUI.create(el, "checkbox");
     },
     getValue: function(el) {
+        RPGUI.set_value(el, $(el).prop("checked"));
         return RPGUI.get_value(el);
     },
     setValue: function(el, value) {
@@ -113,6 +114,20 @@ $.extend(slider, {
 });
 
 Shiny.inputBindings.register(slider, "shinyRPG.slider");
+
+$(document).ready((function() {
+    $(document).on("shiny:connected", (function(event) {
+        Shiny.unbindAll();
+        $.extend(Shiny.inputBindings.bindingNames["shiny.radioInput"].binding, {
+            subscribe: function(el, callback) {
+                $(el).on("click.radioInputBinding change.radioInputBinding", (function(e) {
+                    callback();
+                }));
+            }
+        });
+        Shiny.bindAll();
+    }));
+}));
 
 $((function() {
     $(".rpgui-progress").each((function() {

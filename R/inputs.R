@@ -68,7 +68,6 @@ updateRpgSlider <- function(session = shiny::getDefaultReactiveDomain(), inputId
 #' @rdname rpg-button
 #' @export
 rpgButton <- function(inputId, label, golden = FALSE) {
-
   value <- restoreInput(id = inputId, default = NULL)
 
   tags$button(
@@ -87,6 +86,8 @@ rpgButton <- function(inputId, label, golden = FALSE) {
 #' \link{rpgCheckbox} is a nice checkbox input with RPG design.
 #'
 #' @inheritParams shiny::checkboxInput
+#' @param golden Style parameter. If TRUE, the slider is bordered by fancy elements.
+#' FALSE by default.
 #'
 #' @rdname rpg-checkbox
 #' @export
@@ -94,7 +95,7 @@ rpgCheckbox <- function(inputId, label, value = FALSE, golden = FALSE) {
   value <- restoreInput(id = inputId, default = value)
   HTML(
     sprintf(
-    '<input id="%s" class="%s" type="checkbox" checked="%s"><label>%s</label>',
+      '<input id="%s" class="%s" type="checkbox" checked="%s"><label>%s</label>',
       inputId,
       createElementClass("checkbox", golden),
       value,
@@ -117,6 +118,53 @@ rpgCheckbox <- function(inputId, label, value = FALSE, golden = FALSE) {
 #' @export
 updateRpgCheckbox <- shiny::updateCheckboxInput
 
+
+
+
+#' Create a radio buttons group
+#'
+#' \link{rpgRadio} is a radio group input with RPG design.
+#'
+#' @inheritParams shiny::radioButtons
+#' @param golden Style parameter. If TRUE, the slider is bordered by fancy elements.
+#' FALSE by default.
+#'
+#' @rdname rpg-radio
+#' @export
+rpgRadio <- function(inputId,
+                     label,
+                     choices = NULL,
+                     selected = NULL,
+                     inline = FALSE,
+                     width = NULL,
+                     choiceNames = NULL,
+                     choiceValues = NULL,
+                     golden = FALSE) {
+  args <- normalizeChoicesArgs(choices, choiceNames, choiceValues)
+  selected <- shiny::restoreInput(id = inputId, default = selected)
+  selected <- if (is.null(selected)) {
+    args$choiceValues[[1]]
+  } else {
+    as.character(selected)
+  }
+  if (length(selected) > 1) {
+    stop("The 'selected' argument must be of length 1")
+  }
+  options <- generateOptions(
+    inputId, selected, inline, "radio", golden,
+    args$choiceNames, args$choiceValues
+  )
+  divClass <- "form-group shiny-input-radiogroup shiny-input-container"
+  if (inline) {
+    divClass <- paste(divClass, "shiny-input-container-inline")
+  }
+  inputLabel <- shinyInputLabel(inputId, label)
+  shiny::tags$div(
+    id = inputId, style = htmltools::css(width = shiny::validateCssUnit(width)),
+    class = divClass, role = "radiogroup", `aria-labelledby` = inputLabel$attribs$id,
+    inputLabel, options
+  )
+}
 
 
 

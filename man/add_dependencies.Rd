@@ -18,8 +18,8 @@ an error is raised.
 }
 \examples{
 \dontrun{
- library(htmltools)
- findDependencies(add_dependencies(div()))
- findDependencies(add_dependencies(div(), deps = "bulma"))
+library(htmltools)
+findDependencies(add_dependencies(div()))
+findDependencies(add_dependencies(div(), deps = "bulma"))
 }
 }

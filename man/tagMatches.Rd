@@ -25,9 +25,9 @@ Return TRUE if a tag object matches a specific id, and/or tag name, and/or
 }
 \examples{
 \dontrun{
- library(shiny)
- myTag <- div(class = "bg-blue")
- tagMatches(myTag, id = "d")
- tagMatches(myTag, class = "bg-blue")
+library(shiny)
+myTag <- div(class = "bg-blue")
+tagMatches(myTag, id = "d")
+tagMatches(myTag, class = "bg-blue")
 }
 }

@@ -30,6 +30,7 @@ ui <- rpgPage(
     rpgButton("update", "Update slider"),
     rpgSlider("slider", "Slider", 0, 100, 50, golden = TRUE),
     rpgCheckbox("checkbox", "Check me!"),
+    rpgRadio("radio", "Choose one", names(mtcars)),
     rpgSelect("variable", "Variable:",
               c("Cylinders" = "cyl",
                 "Transmission" = "am",
@@ -68,8 +69,9 @@ server <- function(input, output, session) {
     updateRpgProgress("progress", value = input$slider)
   })
 
-  observeEvent(input$checkbox, {
+  observeEvent(c(input$checkbox, input$radio), {
     if (input$checkbox) showNotification("Hello")
+    showNotification(input$radio)
   })
 }
 

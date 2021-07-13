@@ -43,6 +43,7 @@ rpgProgress <- function(id, value, color = "purple") {
 #' @param color New color.
 #' @param session Shiny session object.
 #'
+#' @export
 #' @rdname rpg-progress
 updateRpgProgress <- function(id, value = NULL, color = NULL, session = shiny::getDefaultReactiveDomain()) {
   if (!is.null(value)) value <- value / 100
